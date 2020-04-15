@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="retro.js"></script>
+  </head>
+  <body>
+    <retro-component text="Can do this too" description="Very nice">
+      <style scoped>
+        ul {
+          margin: 0px;
+          padding: 0px;
+        }
+
+        ul li {
+          margin: 0px;
+          padding: 0px;
+          list-style-type: none;
+        }
+
+        ul li button {
+          background: black;
+          color: white;
+          padding: 10px;
+          margin: 2px;
+          border-radius: 3px;
+          font-family: sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      </style>
+      <h1>{{section}} {{heading}}</h1>
+      <h2>Leave this untouched</h2>
+      <button r:click="update()">Update</button>
+    </retro-component>
+
+    <script>
+      class RetroComponent extends Retro {
+        constructor() {
+          super()
+        }
+
+        setInitialState() {
+          return {
+            section: "1.",
+            heading: "Heading number one",
+            description: "This is some paragraph text",
+          }
+        }
+
+        ready() {
+          console.log('Ready')
+        }
+
+        propsUpdate(props) {
+          console.log('Updated component props: ', props)
+        }
+
+        update() {
+          this.updateState({
+            section: "2.",
+            heading: "Heading number two",
+            description: "This is some more paragraph text",
+          })
+        }
+      }
+
+      // Initialize the app
+      customElements.define('retro-component', RetroComponent)
+    </script>
+  </body>
+</html>
